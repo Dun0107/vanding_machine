@@ -126,3 +126,5 @@ void Widget::on_pbReset_clicked()
     msgBox.information(nullptr, "ChangeMoney", str);
     money = 0;
 }
+
+
