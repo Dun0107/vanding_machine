@@ -17,10 +17,36 @@ Widget::~Widget()
 }
 
 void Widget::changeMoney(int diff){
-    money+=diff;
+    money=money+diff;
+    if(money <= 0){
+        QMessageBox msg;
+        msg.information(nullptr, "message","plz enter the coin");
+        money =money-diff;
+    }
+    if(money < 100){
+        ui->pbCoffee->setEnabled(false);
+        ui->pbTea->setEnabled(false);
+        ui->pbCola->setEnabled(false);
+    }
+    if (money >=100 && money<150){
+        ui->pbCoffee->setEnabled(true);
+        ui->pbTea->setEnabled(false);
+        ui->pbCola->setEnabled(false);
+    }
+    if (money>=150 && money<200){
+        ui->pbCoffee->setEnabled(true);
+        ui->pbTea->setEnabled(true);
+        ui->pbCola->setEnabled(false);
+    }
+    if (money>=200){
+        ui->pbCoffee->setEnabled(true);
+        ui->pbTea->setEnabled(true);
+        ui->pbCola->setEnabled(true);
+    }
     ui->lcdNumber->display(money);
 
 }
+
 
 void Widget::on_pb10_clicked()
 {
@@ -53,56 +79,32 @@ void Widget::on_pb500_clicked()
 
 void Widget::on_pbCoffee_clicked()
 {
-    if(money>=100){
-        ui->pbCoffee->setEnabled(true);
-        QMessageBox msg;
-        msg.information(nullptr, "message","select Coffee");
-        changeMoney(-100);
-    }
-    else {
-        ui->pbCoffee->setEnabled(false);
-        QMessageBox msg;
-        msg.information(nullptr, "message","less money");
-    }
+    QMessageBox msg;
+    msg.information(nullptr, "message","select Coffee");
+    changeMoney(-100);
 }
 
 void Widget::on_pbTea_clicked()
 {
-    if(money>=150){
-        ui->pbTea->setEnabled(true);
-        QMessageBox msg;
-        msg.information(nullptr, "message","select Tea");
-        changeMoney(-150);
-    }
-    else {
-        ui->pbTea->setEnabled(false);
-        QMessageBox msg;
-        msg.information(nullptr, "message","less money");
-    }
+    QMessageBox msg;
+    msg.information(nullptr, "message","select Tea");
+    changeMoney(-150);
 }
 
 void Widget::on_pbCola_clicked()
 {
-    if(money>=200){
-        ui->pbCola->setEnabled(true);
-        QMessageBox msg;
-        msg.information(nullptr, "message","select Cola");
-        changeMoney(-200);
-    }
-    else {
-        ui->pbCola->setEnabled(false);
-        QMessageBox msg;
-        msg.information(nullptr, "message","less money");
-    }
+    QMessageBox msg;
+    msg.information(nullptr, "message","select Cola");
+    changeMoney(-200);
 }
 
 
 void Widget::on_pbReset_clicked()
 {
     ui->lcdNumber->display(0);
-    ui->pbCoffee->setEnabled(true);
-    ui->pbTea->setEnabled(true);
-    ui->pbCola->setEnabled(true);
+    ui->pbCoffee->setEnabled(false);
+    ui->pbTea->setEnabled(false);
+    ui->pbCola->setEnabled(false);
 
     int c10, c50, c100, c500;
     c10=c50=c100=c500=0;
@@ -126,5 +128,4 @@ void Widget::on_pbReset_clicked()
     msgBox.information(nullptr, "ChangeMoney", str);
     money = 0;
 }
-
 
