@@ -125,7 +125,7 @@ void Widget::on_pbReset_clicked()
     sprintf(str ,"500WON : %d\n100WON : %d\n50WON : %d\n10WON : %d\n",c500,c100,c50,c10);
 
     QMessageBox msgBox;
-    msgBox.information(nullptr, "ChangeMoney", str);
+    msgBox.information(nullptr, "message", str);
     money = 0;
 }
 
