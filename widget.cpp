@@ -1,8 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
 #include <QMessageBox>
-#include <stdio.h>
-#include <iostream>
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
